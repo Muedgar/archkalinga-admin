@@ -1,0 +1,73 @@
+import {
+  BoxesIcon,
+  BrickWallIcon,
+  ClipboardCheckIcon,
+  FolderKanbanIcon,
+  LucideIcon,
+  Users,
+} from 'lucide-react'
+
+type Submenu = {
+  href: string
+  label: string
+  active?: boolean
+}
+
+type Menu = {
+  href: string
+  label: string
+  active?: boolean
+  icon: LucideIcon
+  submenus?: Submenu[]
+}
+
+type Group = {
+  groupLabel: string
+  menus: Menu[]
+}
+
+export function getMenuList(): Group[] {
+  return [
+    {
+      groupLabel: 'App',
+      menus: [
+        {
+          href: '/admin/projects',
+          label: 'Projects',
+          icon: FolderKanbanIcon
+        },
+        {
+          href: '/admin/tasks',
+          label: 'Tasks',
+          icon: ClipboardCheckIcon
+        },
+        {
+          href: '/admin/schedules/shell',
+          label: 'Materials Schedules',
+          icon: BrickWallIcon,
+          submenus: [
+            {
+              href: '/admin/schedules/shell',
+              label: 'Shell',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      groupLabel: 'Settings',
+      menus: [
+        {
+          href: '/admin/users',
+          label: 'Users',
+          icon: Users,
+        },
+        {
+          href: '/admin/roles',
+          label: 'Roles',
+          icon: BoxesIcon,
+        },
+      ],
+    },
+  ]
+}

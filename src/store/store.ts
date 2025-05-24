@@ -1,0 +1,58 @@
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import {
+  authReducer,
+  errorReducer,
+  navigationReducer,
+  permissionReducer,
+  roleReducer,
+  userReducer,
+} from './slices'
+import { errorMiddleware } from './middlewares/error.middleware'
+
+import storage from 'redux-persist/lib/storage'
+import {
+  FLUSH,
+  PAUSE,
+  PERSIST,
+  persistReducer,
+  persistStore,
+  PURGE,
+  REGISTER,
+  REHYDRATE,
+} from 'redux-persist'
+
+// Define a persist config
+const persistConfig = {
+  key: 'root',
+  version: 1,
+  storage,
+  whitelist: ['auth'],
+}
+
+const rootReducer = combineReducers({
+  auth: authReducer,
+  error: errorReducer,
+  navigation: navigationReducer,
+  user: userReducer,
+  permission: permissionReducer,
+  role: roleReducer,
+})
+
+// Create a persisted reducer
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        // Ignore these action types for serializable checks
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat(errorMiddleware),
+})
+
+export const persistor = persistStore(store)
+
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

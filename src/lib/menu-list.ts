@@ -34,12 +34,12 @@ export function getMenuList(): Group[] {
         {
           href: '/admin/projects',
           label: 'Projects',
-          icon: FolderKanbanIcon
+          icon: FolderKanbanIcon,
         },
         {
           href: '/admin/tasks',
           label: 'Tasks',
-          icon: ClipboardCheckIcon
+          icon: ClipboardCheckIcon,
         },
         {
           href: '/admin/shell',

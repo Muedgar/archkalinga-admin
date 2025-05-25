@@ -5,10 +5,7 @@ import DataTable from '@/components/datatable/data-table'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/store/store'
 import { useEffect } from 'react'
-import {
-  getRoles,
-  getShellItems,
-} from '@/store/thunks'
+import { getRoles, getShellItems } from '@/store/thunks'
 import { Skeleton } from '@/components/ui/skeleton'
 import { ColumnDef } from '@tanstack/react-table'
 import { IShellItem } from '@/interfaces'
@@ -32,47 +29,42 @@ export default function ShellTemplate() {
     (state: RootState) => state.shellItem
   )
 
-  
   useEffect(() => {
     dispatch(getShellItems({ page, limit }))
   }, [dispatch, page, limit])
 
   // columns
   const columns: ColumnDef<IShellItem>[] = [
+    {
+      accessorFn: (row) => row.shellSubCategory.shellCategory.shellPhase.name,
+      id: 'phase', // Required when using accessorFn
+      header: 'Phase',
+      cell: ({ getValue }) => {
+        const value = getValue() as string | undefined
+        return <div>{value || '-'}</div>
+      },
+    },
+    {
+      accessorFn: (row) => row.shellSubCategory.shellCategory.name,
+      id: 'category', // Required when using accessorFn
+      header: 'Category',
+      cell: ({ getValue }) => {
+        const value = getValue() as string | undefined
+        return <div>{value || '-'}</div>
+      },
+    },
+    {
+      accessorKey: 'shellSubCategory',
+      header: 'Sub category',
+      cell: ({ row }) => {
+        const subcategory = row.getValue('shellSubCategory') as {
+          id?: string
+          name?: string
+        } | null
 
-    {
-    accessorFn: (row) => row.shellSubCategory.shellCategory.shellPhase.name,
-    id: 'phase', // Required when using accessorFn
-    header: 'Phase',
-    cell: ({ getValue }) => {
-      const value = getValue() as string | undefined;
-      return <div>{value || '-'}</div>;
+        return <div>{subcategory?.name || '-'}</div>
+      },
     },
-  },
-    {
-    accessorFn: (row) => row.shellSubCategory.shellCategory.name,
-    id: 'category', // Required when using accessorFn
-    header: 'Category',
-    cell: ({ getValue }) => {
-      const value = getValue() as string | undefined;
-      return <div>{value || '-'}</div>;
-    },
-  },{
-    accessorKey: 'shellSubCategory',
-    header: 'Sub category',
-    cell: ({ row }) => {
-      const subcategory = row.getValue('shellSubCategory') as {
-        id?: string;
-        name?: string;
-      } | null;
-      
-      return (
-        <div>
-          {subcategory?.name || '-'}
-        </div>
-      );
-    },
-  },
     {
       accessorKey: 'description',
       header: 'Description',
@@ -100,10 +92,7 @@ export default function ShellTemplate() {
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <Link prefetch={true} href={`shell/view/${shell.id}`}>
-              <DropdownMenuItem
-              >
-                View
-              </DropdownMenuItem>
+                <DropdownMenuItem>View</DropdownMenuItem>
               </Link>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -121,16 +110,16 @@ export default function ShellTemplate() {
   }
 
   return (
-     <div>
-        {loading && <Skeleton />}
-        <DataTable
-          pageCount={pages}
-          limit={limit}
-          currentPage={page}
-          onPageChange={handlePageChange}
-          columns={columns}
-          data={shellItems || []}
-        />
-      </div>
+    <div>
+      {loading && <Skeleton />}
+      <DataTable
+        pageCount={pages}
+        limit={limit}
+        currentPage={page}
+        onPageChange={handlePageChange}
+        columns={columns}
+        data={shellItems || []}
+      />
+    </div>
   )
 }

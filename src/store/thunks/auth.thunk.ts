@@ -75,7 +75,6 @@ export const validateOtp = createAsyncThunk(
   }
 )
 
-
 export const forgotPassword = createAsyncThunk(
   'auth/forgotPassword',
   async (params: ForgotPasswordParams, { rejectWithValue }) => {
@@ -92,9 +91,15 @@ export const forgotPassword = createAsyncThunk(
 
 export const resetPassword = createAsyncThunk(
   'auth/resetPassword',
-  async ({token ,params}: {token: string; params: ResetPasswordParams}, { rejectWithValue }) => {
+  async (
+    { token, params }: { token: string; params: ResetPasswordParams },
+    { rejectWithValue }
+  ) => {
     try {
-      const response = await axiosClient.post(`/auth/${token}/reset-password`, params)
+      const response = await axiosClient.post(
+        `/auth/${token}/reset-password`,
+        params
+      )
       return response.data.data
     } catch (error: any) {
       return rejectWithValue(

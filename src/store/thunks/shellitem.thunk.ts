@@ -1,6 +1,5 @@
-import { axiosClient } from "@/hooks";
-import { createAsyncThunk } from "@reduxjs/toolkit";
-
+import { axiosClient } from '@/hooks'
+import { createAsyncThunk } from '@reduxjs/toolkit'
 
 export const getShellItems = createAsyncThunk(
   'shell/getShellItems',

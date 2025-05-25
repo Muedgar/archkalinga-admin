@@ -1,16 +1,15 @@
-import { axiosClient } from "@/hooks";
-import { createAsyncThunk } from "@reduxjs/toolkit";
-
+import { axiosClient } from '@/hooks'
+import { createAsyncThunk } from '@reduxjs/toolkit'
 
 interface CreateShellQuantityParams {
-  unit: string;
-  amount: number;
-  itemId: string;
-  taskId: string;
+  unit: string
+  amount: number
+  itemId: string
+  taskId: string
 }
 
 interface UpdateShellQuantityParams {
-  amount: number;
+  amount: number
 }
 
 export const createShellQuantity = createAsyncThunk(
@@ -29,9 +28,15 @@ export const createShellQuantity = createAsyncThunk(
 
 export const updateShellQuantity = createAsyncThunk(
   'shellQuantities/updateShellQuantity',
-  async ({id, params}:{id: string; params: UpdateShellQuantityParams}, { rejectWithValue }) => {
+  async (
+    { id, params }: { id: string; params: UpdateShellQuantityParams },
+    { rejectWithValue }
+  ) => {
     try {
-      const response = await axiosClient.patch(`/shell/quantities/${id}/item-task-to-quantity`, params)
+      const response = await axiosClient.patch(
+        `/shell/quantities/${id}/item-task-to-quantity`,
+        params
+      )
       return response.data.data
     } catch (error: any) {
       return rejectWithValue(
@@ -43,9 +48,11 @@ export const updateShellQuantity = createAsyncThunk(
 
 export const deleteShellQuantity = createAsyncThunk(
   'shellQuantities/deleteShellQuantity',
-  async ({id}:{id: string}, { rejectWithValue }) => {
+  async ({ id }: { id: string }, { rejectWithValue }) => {
     try {
-      const response = await axiosClient.delete(`/shell/quantities/${id}/item-task-to-quantity`)
+      const response = await axiosClient.delete(
+        `/shell/quantities/${id}/item-task-to-quantity`
+      )
       return response.data.data
     } catch (error: any) {
       return rejectWithValue(

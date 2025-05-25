@@ -1,7 +1,6 @@
 'use client'
 
-import ViewRoleForm from "../../forms/view"
-
+import ViewRoleForm from '../../forms/view'
 
 export default function ViewRoleComponent() {
   return (

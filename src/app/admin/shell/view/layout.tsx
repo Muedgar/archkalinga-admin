@@ -11,14 +11,10 @@ export default async function ShellViewLayout({
     <AdminPanelLayout>
       <ContentLayout>
         {{
-          navbar: <NavBar title='Shell Schedule Item' backUrl='/admin/shell' />,
-          content: (
-            <>
-             {children}
-             </>
-          )
+          navbar: <NavBar title="Shell Schedule Item" backUrl="/admin/shell" />,
+          content: <>{children}</>,
         }}
-        </ContentLayout>
+      </ContentLayout>
     </AdminPanelLayout>
   )
 }

@@ -1,6 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { ITask } from '@/interfaces'
-import { assignUsersTask, createTask, deleteTask, getTask, getTasks, unAssignUsersTask, updateTask } from '../thunks'
+import {
+  assignUsersTask,
+  createTask,
+  deleteTask,
+  getTask,
+  getTasks,
+  unAssignUsersTask,
+  updateTask,
+} from '../thunks'
 
 export interface TaskState {
   token: string | null
@@ -54,7 +62,7 @@ export const taskSlice = createSlice({
       .addCase(getTask.rejected, (state) => {
         state.loading = false
       })
-       .addCase(createTask.pending, (state) => {
+      .addCase(createTask.pending, (state) => {
         state.loading = true
       })
       .addCase(createTask.fulfilled, (state) => {
@@ -63,7 +71,7 @@ export const taskSlice = createSlice({
       .addCase(createTask.rejected, (state) => {
         state.loading = false
       })
-       .addCase(updateTask.pending, (state) => {
+      .addCase(updateTask.pending, (state) => {
         state.loading = true
       })
       .addCase(updateTask.fulfilled, (state) => {

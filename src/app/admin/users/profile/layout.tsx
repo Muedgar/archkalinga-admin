@@ -11,14 +11,10 @@ export default async function ProfileViewLayout({
     <AdminPanelLayout>
       <ContentLayout>
         {{
-          navbar: <NavBar title='Profile' />,
-          content: (
-            <>
-             {children}
-             </>
-          )
+          navbar: <NavBar title="Profile" />,
+          content: <>{children}</>,
         }}
-        </ContentLayout>
+      </ContentLayout>
     </AdminPanelLayout>
   )
 }

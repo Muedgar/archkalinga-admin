@@ -22,7 +22,13 @@ import { toast } from 'react-toastify'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { TaskFormValues, taskSchema } from '../schemas'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { IProject } from '@/interfaces'
 
 const NewTaskForm = () => {
@@ -34,7 +40,7 @@ const NewTaskForm = () => {
     resolver: zodResolver(taskSchema),
     defaultValues: {
       name: '',
-      projectId: ''
+      projectId: '',
     },
   })
   useEffect(() => {
@@ -60,8 +66,7 @@ const NewTaskForm = () => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <>
-          
-{/* name */}
+          {/* name */}
           <FormField
             control={form.control}
             name="name"
@@ -76,7 +81,7 @@ const NewTaskForm = () => {
             )}
           />
 
-                    <FormField
+          <FormField
             control={form.control}
             name="projectId"
             render={({ field }) => (

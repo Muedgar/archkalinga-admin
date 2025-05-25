@@ -117,16 +117,18 @@ export const deActivateUser2FA = createAsyncThunk(
 
 export const changePassword = createAsyncThunk(
   'users/changePassword',
-  async ({ id, password }: { id: string, password: string }, { rejectWithValue }) => {
+  async (
+    { id, password }: { id: string; password: string },
+    { rejectWithValue }
+  ) => {
     try {
       const response = await axiosClient.patch(`/users/${id}/change-password`, {
-        password
+        password,
       })
       return response.data.data
     } catch (error: any) {
       return rejectWithValue(
-        error.response?.data?.message ||
-          'Failed to change password.'
+        error.response?.data?.message || 'Failed to change password.'
       )
     }
   }

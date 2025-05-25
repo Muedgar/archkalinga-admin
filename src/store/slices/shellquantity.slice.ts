@@ -61,7 +61,7 @@ export const shellQuantitySlice = createSlice({
       .addCase(getShellQuantity.rejected, (state) => {
         state.loading = false
       })
-       // Create shell quantities cases
+      // Create shell quantities cases
       .addCase(createShellQuantity.pending, (state) => {
         state.loading = true
       })
@@ -71,7 +71,7 @@ export const shellQuantitySlice = createSlice({
       .addCase(createShellQuantity.rejected, (state) => {
         state.loading = false
       })
-       // Update shell quantities cases
+      // Update shell quantities cases
       .addCase(updateShellQuantity.pending, (state) => {
         state.loading = true
       })

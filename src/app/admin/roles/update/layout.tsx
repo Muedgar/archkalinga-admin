@@ -8,17 +8,13 @@ export default async function RoleUpdateLayout({
   children: React.ReactNode
 }>) {
   return (
-     <AdminPanelLayout>
-          <ContentLayout>
-            {{
-              navbar: <NavBar title='Update Role' backUrl='/admin/roles' />,
-              content: (
-                <>
-                 {children}
-                 </>
-              )
-            }}
-            </ContentLayout>
-        </AdminPanelLayout>
+    <AdminPanelLayout>
+      <ContentLayout>
+        {{
+          navbar: <NavBar title="Update Role" backUrl="/admin/roles" />,
+          content: <>{children}</>,
+        }}
+      </ContentLayout>
+    </AdminPanelLayout>
   )
 }

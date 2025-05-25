@@ -11,14 +11,12 @@ export default async function AssignUsersToTaskUpdateLayout({
     <AdminPanelLayout>
       <ContentLayout>
         {{
-          navbar: <NavBar title='Assign Users To Task' backUrl='/admin/tasks' />,
-          content: (
-            <>
-             {children}
-             </>
-          )
+          navbar: (
+            <NavBar title="Assign Users To Task" backUrl="/admin/tasks" />
+          ),
+          content: <>{children}</>,
         }}
-        </ContentLayout>
+      </ContentLayout>
     </AdminPanelLayout>
   )
 }

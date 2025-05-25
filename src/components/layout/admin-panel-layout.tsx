@@ -25,24 +25,24 @@ export default function AdminPanelLayout({
   const { getOpenState } = sidebar
   return (
     <RequireAuth>
-    <SidebarProvider>
-      <SideBar />
-      {/* put main content here */}
-      {!isMobile ? (
-        <section
-          className={cn(
-            'fixed top-0 bg-white h-screen overflow-y-auto transition-all ease-in duration-300',
-            getOpenState() ? 'left-[90px] right-0' : 'left-72 right-0'
-          )}
-        >
-          {children}
-        </section>
-      ) : (
-        <section className="fixed top-0 left-0 right-0 bg-white h-screen overflow-y-auto transition-all ease-in duration-300">
-          {children}
-        </section>
-      )}
-    </SidebarProvider>
+      <SidebarProvider>
+        <SideBar />
+        {/* put main content here */}
+        {!isMobile ? (
+          <section
+            className={cn(
+              'fixed top-0 bg-white h-screen overflow-y-auto transition-all ease-in duration-300',
+              getOpenState() ? 'left-[90px] right-0' : 'left-72 right-0'
+            )}
+          >
+            {children}
+          </section>
+        ) : (
+          <section className="fixed top-0 left-0 right-0 bg-white h-screen overflow-y-auto transition-all ease-in duration-300">
+            {children}
+          </section>
+        )}
+      </SidebarProvider>
     </RequireAuth>
   )
 }

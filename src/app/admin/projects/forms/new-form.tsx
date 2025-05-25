@@ -56,8 +56,7 @@ const NewProjectForm = () => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <>
-          
-{/* name */}
+          {/* name */}
           <FormField
             control={form.control}
             name="name"

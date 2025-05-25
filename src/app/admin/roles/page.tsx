@@ -47,7 +47,7 @@ const handleActivate = async (dispatch: AppDispatch, roleId: string) => {
     .catch((error) => {
       toast.error(error)
     })
- }
+}
 
 const handleDeactivate = async (dispatch: AppDispatch, roleId: string) => {
   await dispatch(deActivateRole({ id: roleId }))
@@ -60,7 +60,8 @@ const handleDeactivate = async (dispatch: AppDispatch, roleId: string) => {
           limit: 10,
         })
       )
-    }).catch((error) => {
+    })
+    .catch((error) => {
       toast.error(error)
     })
 }
@@ -76,7 +77,8 @@ const handleDelete = async (dispatch: AppDispatch, roleId: string) => {
           limit: 10,
         })
       )
-    }).catch(() => {
+    })
+    .catch(() => {
       toast.error('Cannot delete this role because it is assigned to a user.')
     })
 }
@@ -169,16 +171,10 @@ export default function Roles() {
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <Link prefetch={true} href={`roles/view/${role.id}`}>
-              <DropdownMenuItem
-              >
-                View
-              </DropdownMenuItem>
+                <DropdownMenuItem>View</DropdownMenuItem>
               </Link>
               <Link prefetch={true} href={`roles/update/${role.id}`}>
-              <DropdownMenuItem
-              >
-                Edit
-              </DropdownMenuItem>
+                <DropdownMenuItem>Edit</DropdownMenuItem>
               </Link>
               {role.status ? (
                 <DropdownMenuItem onClick={() => showDeactivateDialog(role)}>
@@ -212,34 +208,34 @@ export default function Roles() {
       <ContentLayout>
         {{
           navbar: (
-            <NavBar title='Roles'>
+            <NavBar title="Roles">
               <Link prefetch={true} href={'/admin/roles/new'}>
-              <Button>
-                <PlusIcon />
-                Create Role
-              </Button>
+                <Button>
+                  <PlusIcon />
+                  Create Role
+                </Button>
               </Link>
             </NavBar>
           ),
           content: (
-             <div>
-        {loading && <Skeleton />}
-        <DataTable
-          pageCount={pages}
-          limit={limit}
-          currentPage={page}
-          onPageChange={handlePageChange}
-          columns={columns}
-          data={roles || []}
-        />
-        <ConfirmationDialog
-          isOpen={dialogConfig.isOpen}
-          onClose={closeDialog}
-          onConfirm={dialogConfig.onConfirm}
-          title={dialogConfig.title}
-          description={dialogConfig.description}
-        />
-      </div>
+            <div>
+              {loading && <Skeleton />}
+              <DataTable
+                pageCount={pages}
+                limit={limit}
+                currentPage={page}
+                onPageChange={handlePageChange}
+                columns={columns}
+                data={roles || []}
+              />
+              <ConfirmationDialog
+                isOpen={dialogConfig.isOpen}
+                onClose={closeDialog}
+                onConfirm={dialogConfig.onConfirm}
+                title={dialogConfig.title}
+                description={dialogConfig.description}
+              />
+            </div>
           ),
         }}
       </ContentLayout>

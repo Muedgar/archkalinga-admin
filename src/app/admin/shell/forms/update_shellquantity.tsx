@@ -10,7 +10,12 @@ import { useParams, useRouter, useSearchParams } from 'next/navigation'
 
 // UI
 import {
-  Form, FormControl, FormField, FormItem, FormLabel, FormMessage
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
@@ -20,17 +25,28 @@ import { AppDispatch, RootState } from '@/store/store'
 import { getShellQuantity, updateShellQuantity } from '@/store/thunks'
 
 // Schema
-import { ShellQuantityFormValues, shellQuantitySchema } from '../schemas/shellquantity.schema'
-import { Select, SelectItem, SelectTrigger, SelectValue, SelectContent } from '@/components/ui/select'
+import {
+  ShellQuantityFormValues,
+  shellQuantitySchema,
+} from '../schemas/shellquantity.schema'
+import {
+  Select,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+} from '@/components/ui/select'
 
 const UpdateShellQuantityForm = () => {
   const dispatch = useDispatch<AppDispatch>()
   const router = useRouter()
-  const {id} = useParams()
+  const { id } = useParams()
   const searchParams = useSearchParams()
   const itemTaskToQuantity = searchParams.get('item')
 
-  const {loading, currentShellQuantity} = useSelector((state: RootState) => state.shellQuantity)
+  const { loading, currentShellQuantity } = useSelector(
+    (state: RootState) => state.shellQuantity
+  )
   const { shellItems } = useSelector((state: RootState) => state.shellItem)
   const { tasks } = useSelector((state: RootState) => state.task)
 
@@ -47,14 +63,15 @@ const UpdateShellQuantityForm = () => {
   // Load existing shell quantity data
   useEffect(() => {
     if (id) {
-      dispatch(getShellQuantity({ id: `${id}` }))
-      .unwrap()
+      dispatch(getShellQuantity({ id: `${id}` })).unwrap()
     }
   }, [dispatch, id])
 
   useEffect(() => {
     if (currentShellQuantity) {
-        const foundItem = currentShellQuantity.itemTaskQuantity.find(item => item.id === itemTaskToQuantity)
+      const foundItem = currentShellQuantity.itemTaskQuantity.find(
+        (item) => item.id === itemTaskToQuantity
+      )
       form.reset({
         amount: foundItem?.amount.toString() || '',
         unit: foundItem?.unit || '',
@@ -66,7 +83,12 @@ const UpdateShellQuantityForm = () => {
 
   const onSubmit = async (data: ShellQuantityFormValues) => {
     if (!itemTaskToQuantity) return
-    await dispatch(updateShellQuantity({ id: itemTaskToQuantity, params: { amount: Number(data.amount) } }))
+    await dispatch(
+      updateShellQuantity({
+        id: itemTaskToQuantity,
+        params: { amount: Number(data.amount) },
+      })
+    )
       .unwrap()
       .then(() => {
         toast.success('Shell Quantity updated successfully')
@@ -80,7 +102,6 @@ const UpdateShellQuantityForm = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-
         {/* Unit */}
         <FormField
           control={form.control}
@@ -89,7 +110,12 @@ const UpdateShellQuantityForm = () => {
             <FormItem>
               <FormLabel>Unit</FormLabel>
               <FormControl>
-                <Input disabled placeholder="Auto-filled from item" {...field} readOnly />
+                <Input
+                  disabled
+                  placeholder="Auto-filled from item"
+                  {...field}
+                  readOnly
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -104,7 +130,11 @@ const UpdateShellQuantityForm = () => {
             <FormItem>
               <FormLabel>Amount</FormLabel>
               <FormControl>
-                <Input type="number" placeholder="Enter new amount" {...field} />
+                <Input
+                  type="number"
+                  placeholder="Enter new amount"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -119,10 +149,7 @@ const UpdateShellQuantityForm = () => {
             <FormItem>
               <FormLabel>Shell Item</FormLabel>
               <FormControl>
-                <Select
-                  onValueChange={field.onChange}
-                  value={field.value}
-                >
+                <Select onValueChange={field.onChange} value={field.value}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select an item" />
                   </SelectTrigger>
@@ -148,10 +175,7 @@ const UpdateShellQuantityForm = () => {
             <FormItem>
               <FormLabel>Task</FormLabel>
               <FormControl>
-                <Select
-                  onValueChange={field.onChange}
-                  value={field.value}
-                >
+                <Select onValueChange={field.onChange} value={field.value}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select a task" />
                   </SelectTrigger>

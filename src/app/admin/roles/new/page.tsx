@@ -10,18 +10,17 @@ export default function NewRole() {
     <AdminPanelLayout>
       <ContentLayout>
         {{
-          navbar: <NavBar title='Create Role' backUrl='/admin/roles' />,
+          navbar: <NavBar title="Create Role" backUrl="/admin/roles" />,
           content: (
             <div className="md:w-1/3 mx-auto">
-          <NewRoleForm />
-        </div>
-          )
+              <NewRoleForm />
+            </div>
+          ),
         }}
-        </ContentLayout>
+      </ContentLayout>
     </AdminPanelLayout>
   )
 }
-
 
 /*
 

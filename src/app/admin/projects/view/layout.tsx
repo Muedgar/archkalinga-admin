@@ -11,14 +11,10 @@ export default async function ProjectViewLayout({
     <AdminPanelLayout>
       <ContentLayout>
         {{
-          navbar: <NavBar title='View Project' backUrl='/admin/projects' />,
-          content: (
-            <>
-             {children}
-             </>
-          )
+          navbar: <NavBar title="View Project" backUrl="/admin/projects" />,
+          content: <>{children}</>,
         }}
-        </ContentLayout>
+      </ContentLayout>
     </AdminPanelLayout>
   )
 }

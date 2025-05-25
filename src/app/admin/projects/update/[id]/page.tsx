@@ -1,7 +1,6 @@
 'use client'
 
-import UpdateProjectForm from "../../forms/update-form"
-
+import UpdateProjectForm from '../../forms/update-form'
 
 export default function UpdateUserComponent() {
   return (

@@ -2,7 +2,6 @@ import { z } from 'zod'
 
 // Validation schema using Zod
 export const changePasswordSchema = z.object({
-
   password: z
     .string()
     .min(8, { message: 'Password must be at least 8 characters' })

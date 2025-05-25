@@ -1,8 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import {
-  getShellItem,
-  getShellItems,
-} from '../thunks'
+import { getShellItem, getShellItems } from '../thunks'
 import { IShellItem } from '@/interfaces'
 
 export interface ShellItemState {

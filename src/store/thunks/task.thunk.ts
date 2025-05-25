@@ -1,16 +1,14 @@
-import { axiosClient } from "@/hooks";
-import { createAsyncThunk } from "@reduxjs/toolkit";
-
+import { axiosClient } from '@/hooks'
+import { createAsyncThunk } from '@reduxjs/toolkit'
 
 interface CreateTaskParams {
-  name: string;
-  projectId: string;
+  name: string
+  projectId: string
 }
 
 interface AssignUsersTaskParams {
-  usersId: string[];
+  usersId: string[]
 }
-
 
 export const getTasks = createAsyncThunk(
   'tasks/getTasks',
@@ -76,10 +74,12 @@ export const createTask = createAsyncThunk(
   }
 )
 
-
 export const updateTask = createAsyncThunk(
   'tasks/updateTask',
-  async ({id, params}:{id: string; params: CreateTaskParams}, { rejectWithValue }) => {
+  async (
+    { id, params }: { id: string; params: CreateTaskParams },
+    { rejectWithValue }
+  ) => {
     try {
       const response = await axiosClient.patch(`/tasks/${id}`, params)
       return response.data.data
@@ -93,9 +93,15 @@ export const updateTask = createAsyncThunk(
 
 export const assignUsersTask = createAsyncThunk(
   'tasks/assignUsersTask',
-  async ({id, params}:{id: string; params: AssignUsersTaskParams}, { rejectWithValue }) => {
+  async (
+    { id, params }: { id: string; params: AssignUsersTaskParams },
+    { rejectWithValue }
+  ) => {
     try {
-      const response = await axiosClient.patch(`/tasks/${id}/assign-users`, params)
+      const response = await axiosClient.patch(
+        `/tasks/${id}/assign-users`,
+        params
+      )
       return response.data.data
     } catch (error: any) {
       return rejectWithValue(
@@ -107,9 +113,15 @@ export const assignUsersTask = createAsyncThunk(
 
 export const unAssignUsersTask = createAsyncThunk(
   'tasks/unAssignUsersTask',
-  async ({id, params}:{id: string; params: AssignUsersTaskParams}, { rejectWithValue }) => {
+  async (
+    { id, params }: { id: string; params: AssignUsersTaskParams },
+    { rejectWithValue }
+  ) => {
     try {
-      const response = await axiosClient.patch(`/tasks/${id}/unassign-users`, params)
+      const response = await axiosClient.patch(
+        `/tasks/${id}/unassign-users`,
+        params
+      )
       return response.data.data
     } catch (error: any) {
       return rejectWithValue(

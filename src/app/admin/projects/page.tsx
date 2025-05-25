@@ -6,9 +6,7 @@ import AdminPanelLayout from '@/components/layout/admin-panel-layout'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/store/store'
 import { useEffect } from 'react'
-import {
-  getProjects,
-} from '@/store/thunks'
+import { getProjects } from '@/store/thunks'
 import { Skeleton } from '@/components/ui/skeleton'
 import { ColumnDef } from '@tanstack/react-table'
 import { IProject } from '@/interfaces'
@@ -26,8 +24,6 @@ import { MoreHorizontal, PlusIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
-
-
 export default function Projects() {
   const router = useRouter()
   // fetch data
@@ -40,9 +36,6 @@ export default function Projects() {
     dispatch(getProjects({ page, limit }))
   }, [dispatch, page, limit])
 
-
-
-
   // columns
   const columns: ColumnDef<IProject>[] = [
     {
@@ -51,23 +44,24 @@ export default function Projects() {
       cell: ({ row }) => <div>{row.getValue('name') ?? '-'}</div>,
     },
     {
-    accessorKey: 'createdBy',
-    header: 'Created By',
-    cell: ({ row }) => {
-      const createdBy = row.getValue('createdBy') as {
-        userName?: string;
-        firstName?: string;
-        lastName?: string;
-      } | null;
-      
-      return (
-        <div>
-          {createdBy?.userName ?? 
-           (`${createdBy?.firstName ?? ''} ${createdBy?.lastName ?? ''}`.trim() || '-')}
-        </div>
-      );
+      accessorKey: 'createdBy',
+      header: 'Created By',
+      cell: ({ row }) => {
+        const createdBy = row.getValue('createdBy') as {
+          userName?: string
+          firstName?: string
+          lastName?: string
+        } | null
+
+        return (
+          <div>
+            {createdBy?.userName ??
+              (`${createdBy?.firstName ?? ''} ${createdBy?.lastName ?? ''}`.trim() ||
+                '-')}
+          </div>
+        )
+      },
     },
-  },
     {
       accessorKey: 'actions',
       header: 'Actions',
@@ -85,16 +79,10 @@ export default function Projects() {
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <Link prefetch={true} href={`projects/view/${project.id}`}>
-              <DropdownMenuItem
-              >
-                View
-              </DropdownMenuItem>
+                <DropdownMenuItem>View</DropdownMenuItem>
               </Link>
               <Link prefetch={true} href={`projects/update/${project.id}`}>
-              <DropdownMenuItem
-              >
-                Update
-              </DropdownMenuItem>
+                <DropdownMenuItem>Update</DropdownMenuItem>
               </Link>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -116,12 +104,12 @@ export default function Projects() {
       <ContentLayout>
         {{
           navbar: (
-            <NavBar title='Projects'>
+            <NavBar title="Projects">
               <Link prefetch={true} href={'/admin/projects/new'}>
-              <Button>
-                <PlusIcon />
-                Create Project
-              </Button>
+                <Button>
+                  <PlusIcon />
+                  Create Project
+                </Button>
               </Link>
             </NavBar>
           ),

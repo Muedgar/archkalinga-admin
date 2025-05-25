@@ -21,7 +21,11 @@ import { toast } from 'react-toastify'
 import { useParams, useRouter } from 'next/navigation'
 import { IUser } from '@/interfaces'
 import { AssignUsersTaskFormValues, assignUsersTaskSchema } from '../schemas'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
 import { cn } from '@/lib'
 import { Checkbox } from '@/components/ui/checkbox'
 
@@ -39,9 +43,9 @@ const AssignUsersTaskForm = () => {
     },
   })
 
-   useEffect(() => {
-      dispatch(getUsers({ page: 1, limit: 400 }))
-    }, [dispatch])
+  useEffect(() => {
+    dispatch(getUsers({ page: 1, limit: 400 }))
+  }, [dispatch])
 
   useEffect(() => {
     if (id) {
@@ -50,14 +54,13 @@ const AssignUsersTaskForm = () => {
   }, [dispatch, id])
 
   useEffect(() => {
-      if (currentTask) {
-        form.setValue(
-          'usersId',
-          currentTask.assignedUsers?.map((user) => user.id)
-        )
-      }
-    }, [form, currentTask])
-  
+    if (currentTask) {
+      form.setValue(
+        'usersId',
+        currentTask.assignedUsers?.map((user) => user.id)
+      )
+    }
+  }, [form, currentTask])
 
   const onSubmit = async (data: AssignUsersTaskFormValues) => {
     await dispatch(assignUsersTask({ id: `${id}`, params: { ...data } }))
@@ -74,8 +77,7 @@ const AssignUsersTaskForm = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-       
-                 {/* Users Multi-Select */}
+        {/* Users Multi-Select */}
         <FormField
           control={form.control}
           name="usersId"
@@ -114,10 +116,7 @@ const AssignUsersTaskForm = () => {
                               checked={field.value.includes(user.id)}
                               onCheckedChange={(checked: boolean) => {
                                 if (checked) {
-                                  field.onChange([
-                                    ...field.value,
-                                    user.id,
-                                  ])
+                                  field.onChange([...field.value, user.id])
                                 } else {
                                   field.onChange(
                                     field.value.filter(

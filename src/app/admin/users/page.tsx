@@ -193,16 +193,10 @@ export default function Users() {
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <Link prefetch={true} href={`users/view/${user.id}`}>
-              <DropdownMenuItem
-              >
-                View
-              </DropdownMenuItem>
+                <DropdownMenuItem>View</DropdownMenuItem>
               </Link>
               <Link prefetch={true} href={`users/update/${user.id}`}>
-              <DropdownMenuItem
-              >
-                Edit
-              </DropdownMenuItem>
+                <DropdownMenuItem>Edit</DropdownMenuItem>
               </Link>
               {user.status ? (
                 <DropdownMenuItem onClick={() => showDeactivateDialog(user)}>
@@ -242,19 +236,19 @@ export default function Users() {
       <ContentLayout>
         {{
           navbar: (
-            <NavBar title='Users'>
+            <NavBar title="Users">
               <Link prefetch={true} href={'/admin/users/new'}>
-              <Button>
-                <PlusIcon />
-                Create User
-              </Button>
+                <Button>
+                  <PlusIcon />
+                  Create User
+                </Button>
               </Link>
             </NavBar>
           ),
           content: (
             <div>
               {loading && <Skeleton />}
-              
+
               <DataTable
                 pageCount={pages}
                 limit={limit}

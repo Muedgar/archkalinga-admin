@@ -6,10 +6,7 @@ import AdminPanelLayout from '@/components/layout/admin-panel-layout'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/store/store'
 import { useEffect, useState } from 'react'
-import {
-  deleteTask,
-  getTasks,
-} from '@/store/thunks'
+import { deleteTask, getTasks } from '@/store/thunks'
 import { Skeleton } from '@/components/ui/skeleton'
 import { ColumnDef } from '@tanstack/react-table'
 import { ITask } from '@/interfaces'
@@ -30,7 +27,6 @@ import { DialogConfig } from '@/types'
 import { ConfirmationDialog } from '@/components/alert-dialog'
 import Link from 'next/link'
 
-
 const handleDelete = async (dispatch: AppDispatch, taskId: string) => {
   await dispatch(deleteTask({ id: taskId }))
     .unwrap()
@@ -42,8 +38,11 @@ const handleDelete = async (dispatch: AppDispatch, taskId: string) => {
           limit: 10,
         })
       )
-    }).catch(() => {
-      toast.error('Cannot delete this task because it is assigned to a user or item.')
+    })
+    .catch(() => {
+      toast.error(
+        'Cannot delete this task because it is assigned to a user or item.'
+      )
     })
 }
 
@@ -55,32 +54,29 @@ export default function Tasks() {
     (state: RootState) => state.task
   )
 
-    const [dialogConfig, setDialogConfig] = useState<DialogConfig>({
-      isOpen: false,
-      title: '',
-      description: '',
-      onConfirm: () => {},
-    })
-      const closeDialog = () => {
+  const [dialogConfig, setDialogConfig] = useState<DialogConfig>({
+    isOpen: false,
+    title: '',
+    description: '',
+    onConfirm: () => {},
+  })
+  const closeDialog = () => {
     setDialogConfig((prev) => ({ ...prev, isOpen: false }))
   }
-    const showDeleteDialog = (task: ITask) => {
-      setDialogConfig({
-        isOpen: true,
-        title: 'Delete task',
-        description: `Are you sure you want to delete ${task.name}?`,
-        onConfirm: () => {
-          handleDelete(dispatch, task.id)
-          closeDialog()
-        },
-      })
-    }
+  const showDeleteDialog = (task: ITask) => {
+    setDialogConfig({
+      isOpen: true,
+      title: 'Delete task',
+      description: `Are you sure you want to delete ${task.name}?`,
+      onConfirm: () => {
+        handleDelete(dispatch, task.id)
+        closeDialog()
+      },
+    })
+  }
   useEffect(() => {
     dispatch(getTasks({ page, limit }))
   }, [dispatch, page, limit])
-
-
-
 
   // columns
   const columns: ColumnDef<ITask>[] = [
@@ -90,21 +86,17 @@ export default function Tasks() {
       cell: ({ row }) => <div>{row.getValue('name') ?? '-'}</div>,
     },
     {
-    accessorKey: 'project',
-    header: 'Project name',
-    cell: ({ row }) => {
-      const project = row.getValue('project') as {
-        id?: string;
-        name?: string;
-      } | null;
-      
-      return (
-        <div>
-          {project?.name || '-'}
-        </div>
-      );
+      accessorKey: 'project',
+      header: 'Project name',
+      cell: ({ row }) => {
+        const project = row.getValue('project') as {
+          id?: string
+          name?: string
+        } | null
+
+        return <div>{project?.name || '-'}</div>
+      },
     },
-  },
     {
       accessorKey: 'actions',
       header: 'Actions',
@@ -122,28 +114,16 @@ export default function Tasks() {
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <Link prefetch={true} href={`tasks/view/${task.id}`}>
-                <DropdownMenuItem
-              >
-                View
-              </DropdownMenuItem>
+                <DropdownMenuItem>View</DropdownMenuItem>
               </Link>
               <Link prefetch={true} href={`tasks/update/${task.id}`}>
-              <DropdownMenuItem
-              >
-                Update
-              </DropdownMenuItem>
+                <DropdownMenuItem>Update</DropdownMenuItem>
               </Link>
               <Link prefetch={true} href={`tasks/assignusers/${task.id}`}>
-              <DropdownMenuItem
-              >
-                Assign Users
-              </DropdownMenuItem>
+                <DropdownMenuItem>Assign Users</DropdownMenuItem>
               </Link>
               <Link prefetch={true} href={`tasks/unassignusers/${task.id}`}>
-              <DropdownMenuItem
-              >
-                Unassign Users
-              </DropdownMenuItem>
+                <DropdownMenuItem>Unassign Users</DropdownMenuItem>
               </Link>
               <DropdownMenuItem onClick={() => showDeleteDialog(task)}>
                 Delete
@@ -168,12 +148,12 @@ export default function Tasks() {
       <ContentLayout>
         {{
           navbar: (
-            <NavBar title='Tasks'>
+            <NavBar title="Tasks">
               <Link prefetch={true} href={'/admin/tasks/new'}>
-              <Button>
-                <PlusIcon />
-                Create Task
-              </Button>
+                <Button>
+                  <PlusIcon />
+                  Create Task
+                </Button>
               </Link>
             </NavBar>
           ),
@@ -188,13 +168,13 @@ export default function Tasks() {
                 columns={columns}
                 data={tasks || []}
               />
-               <ConfirmationDialog
-                        isOpen={dialogConfig.isOpen}
-                        onClose={closeDialog}
-                        onConfirm={dialogConfig.onConfirm}
-                        title={dialogConfig.title}
-                        description={dialogConfig.description}
-                      />
+              <ConfirmationDialog
+                isOpen={dialogConfig.isOpen}
+                onClose={closeDialog}
+                onConfirm={dialogConfig.onConfirm}
+                title={dialogConfig.title}
+                description={dialogConfig.description}
+              />
             </div>
           ),
         }}

@@ -10,11 +10,22 @@ import { useRouter } from 'next/navigation'
 
 // UI components
 import {
-  Form, FormControl, FormField, FormItem, FormLabel, FormMessage
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 
 // Store
 import { AppDispatch, RootState } from '@/store/store'
@@ -22,7 +33,10 @@ import { getTasks, getShellItems, createShellQuantity } from '@/store/thunks'
 
 // Types
 import { IShellItem, ITask } from '@/interfaces'
-import { ShellQuantityFormValues, shellQuantitySchema } from '../schemas/shellquantity.schema'
+import {
+  ShellQuantityFormValues,
+  shellQuantitySchema,
+} from '../schemas/shellquantity.schema'
 
 const NewShellQuantityForm = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -43,55 +57,63 @@ const NewShellQuantityForm = () => {
   })
 
   useEffect(() => {
-  dispatch(getShellItems({ page: 1, limit: 200 }))
-  dispatch(getTasks({ page: 1, limit: 200 }))
-}, [dispatch])
+    dispatch(getShellItems({ page: 1, limit: 200 }))
+    dispatch(getTasks({ page: 1, limit: 200 }))
+  }, [dispatch])
 
-// Watch itemId and update unit when itemId changes
-useEffect(() => {
-  const subscription = form.watch((value, { name }) => {
-    if (name === 'itemId') {
-      const selectedItem = shellItems?.find(item => item.id === value.itemId)
-      if (selectedItem) {
-        form.setValue('unit', selectedItem.unit, { shouldValidate: true })
+  // Watch itemId and update unit when itemId changes
+  useEffect(() => {
+    const subscription = form.watch((value, { name }) => {
+      if (name === 'itemId') {
+        const selectedItem = shellItems?.find(
+          (item) => item.id === value.itemId
+        )
+        if (selectedItem) {
+          form.setValue('unit', selectedItem.unit, { shouldValidate: true })
+        }
       }
-    }
-  })
+    })
 
-  return () => subscription.unsubscribe()
-}, [form, shellItems])
-
+    return () => subscription.unsubscribe()
+  }, [form, shellItems])
 
   const onSubmit = async (data: ShellQuantityFormValues) => {
-    await dispatch(createShellQuantity({ ...data, amount: Number(data.amount) }))
+    await dispatch(
+      createShellQuantity({ ...data, amount: Number(data.amount) })
+    )
       .unwrap()
       .then(() => {
         toast.success('Shell Quantity created successfully')
         router.push('/admin/shell')
       })
       .catch((error) => {
-        toast.error(error || 'Something went wrong while creating shell quantity')
+        toast.error(
+          error || 'Something went wrong while creating shell quantity'
+        )
       })
   }
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-
-       <FormField
-  control={form.control}
-  name="unit"
-  render={({ field }) => (
-    <FormItem>
-      <FormLabel>Unit</FormLabel>
-      <FormControl>
-        <Input disabled placeholder="Auto-filled from item" {...field} readOnly />
-      </FormControl>
-      <FormMessage />
-    </FormItem>
-  )}
-/>
-
+        <FormField
+          control={form.control}
+          name="unit"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Unit</FormLabel>
+              <FormControl>
+                <Input
+                  disabled
+                  placeholder="Auto-filled from item"
+                  {...field}
+                  readOnly
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         {/* Amount */}
         <FormField
@@ -101,7 +123,11 @@ useEffect(() => {
             <FormItem>
               <FormLabel>Amount</FormLabel>
               <FormControl>
-                <Input type="number" placeholder="Enter quantity amount" {...field} />
+                <Input
+                  type="number"
+                  placeholder="Enter quantity amount"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

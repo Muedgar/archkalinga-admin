@@ -11,14 +11,12 @@ export default async function ShellViewQuantityLayout({
     <AdminPanelLayout>
       <ContentLayout>
         {{
-          navbar: <NavBar title='Shell Schedule Quantity' backUrl='/admin/shell' />,
-          content: (
-            <>
-             {children}
-             </>
-          )
+          navbar: (
+            <NavBar title="Shell Schedule Quantity" backUrl="/admin/shell" />
+          ),
+          content: <>{children}</>,
         }}
-        </ContentLayout>
+      </ContentLayout>
     </AdminPanelLayout>
   )
 }

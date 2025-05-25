@@ -1,6 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { IProject } from '@/interfaces'
-import { createProject, getProject, getProjects, updateProject } from '../thunks'
+import {
+  createProject,
+  getProject,
+  getProjects,
+  updateProject,
+} from '../thunks'
 
 export interface ProjectState {
   token: string | null
@@ -54,7 +59,7 @@ export const projectSlice = createSlice({
       .addCase(getProject.rejected, (state) => {
         state.loading = false
       })
-       .addCase(createProject.pending, (state) => {
+      .addCase(createProject.pending, (state) => {
         state.loading = true
       })
       .addCase(createProject.fulfilled, (state) => {
@@ -63,7 +68,7 @@ export const projectSlice = createSlice({
       .addCase(createProject.rejected, (state) => {
         state.loading = false
       })
-       .addCase(updateProject.pending, (state) => {
+      .addCase(updateProject.pending, (state) => {
         state.loading = true
       })
       .addCase(updateProject.fulfilled, (state) => {

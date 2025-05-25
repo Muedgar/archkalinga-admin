@@ -11,14 +11,12 @@ export default async function UnAssignUsersToTaskUpdateLayout({
     <AdminPanelLayout>
       <ContentLayout>
         {{
-          navbar: <NavBar title='Unassign Users From Task' backUrl='/admin/tasks' />,
-          content: (
-            <>
-             {children}
-             </>
-          )
+          navbar: (
+            <NavBar title="Unassign Users From Task" backUrl="/admin/tasks" />
+          ),
+          content: <>{children}</>,
         }}
-        </ContentLayout>
+      </ContentLayout>
     </AdminPanelLayout>
   )
 }

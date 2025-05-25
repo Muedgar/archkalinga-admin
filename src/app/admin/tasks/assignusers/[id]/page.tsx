@@ -1,7 +1,6 @@
 'use client'
 
-import AssignUsersTaskForm from "../../forms/assign-users-form"
-
+import AssignUsersTaskForm from '../../forms/assign-users-form'
 
 export default function AssignUserToTaskComponent() {
   return (

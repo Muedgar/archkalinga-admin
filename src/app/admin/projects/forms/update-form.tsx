@@ -27,7 +27,9 @@ const UpdateProjectForm = () => {
   const router = useRouter()
   const { id } = useParams()
   const dispatch = useDispatch<AppDispatch>()
-  const { currentProject, loading } = useSelector((state: RootState) => state.project)
+  const { currentProject, loading } = useSelector(
+    (state: RootState) => state.project
+  )
 
   const form = useForm<ProjectFormValues>({
     resolver: zodResolver(projectSchema),

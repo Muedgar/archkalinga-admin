@@ -1,17 +1,17 @@
-import { IShellItem } from "./shell-item.interface";
-import { ITask } from "./task.interface";
-import { IUser } from "./user-interface";
+import { IShellItem } from './shell-item.interface'
+import { ITask } from './task.interface'
+import { IUser } from './user-interface'
 
 export interface IItemTaskQuantity {
-    id: string;
-    amount: number;
-    unit: string;
-    item: IShellItem;
-    task: ITask
+  id: string
+  amount: number
+  unit: string
+  item: IShellItem
+  task: ITask
 }
 
 export interface IShellQuantity {
-    id: string;
-    createdBy: IUser
-    itemTaskQuantity: IItemTaskQuantity[]
+  id: string
+  createdBy: IUser
+  itemTaskQuantity: IItemTaskQuantity[]
 }

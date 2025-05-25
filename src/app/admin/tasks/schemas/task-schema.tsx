@@ -9,7 +9,6 @@ export const taskSchema = z.object({
   projectId: z.string().min(1, { message: 'Project is required' }),
 })
 
-
 export const taskUpdateSchema = z.object({
   name: z
     .string()
@@ -17,7 +16,6 @@ export const taskUpdateSchema = z.object({
     .max(50, { message: 'Task name is too long' }),
   projectId: z.string().min(1, { message: 'Project is required' }),
 })
-
 
 export const assignUsersTaskSchema = z.object({
   usersId: z

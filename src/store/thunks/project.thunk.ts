@@ -1,11 +1,9 @@
-import { axiosClient } from "@/hooks";
-import { createAsyncThunk } from "@reduxjs/toolkit";
-
+import { axiosClient } from '@/hooks'
+import { createAsyncThunk } from '@reduxjs/toolkit'
 
 interface CreateProjectParams {
-  name: string;
+  name: string
 }
-
 
 export const getProjects = createAsyncThunk(
   'projects/getProjects',
@@ -57,10 +55,12 @@ export const createProject = createAsyncThunk(
   }
 )
 
-
 export const updateProject = createAsyncThunk(
   'projects/updateProject',
-  async ({id, params}:{id: string; params: CreateProjectParams}, { rejectWithValue }) => {
+  async (
+    { id, params }: { id: string; params: CreateProjectParams },
+    { rejectWithValue }
+  ) => {
     try {
       const response = await axiosClient.patch(`/projects/${id}`, params)
       return response.data.data

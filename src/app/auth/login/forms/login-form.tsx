@@ -65,7 +65,10 @@ const LoginForm = () => {
     }
   }
 
-  const handleKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (
+    index: number,
+    e: React.KeyboardEvent<HTMLInputElement>
+  ) => {
     if (e.key === 'Backspace' && !otp[index] && index > 0) {
       // Move focus to previous input on backspace
       inputRefs.current[index - 1]?.focus()
@@ -213,7 +216,7 @@ const LoginForm = () => {
             <p className="text-muted-foreground text-sm text-center">
               Please enter the 6-digit verification code sent to your email.
             </p>
-            
+
             <div className="flex justify-center gap-2">
               {Array.from({ length: 6 }).map((_, index) => (
                 <Input
@@ -225,7 +228,9 @@ const LoginForm = () => {
                   onChange={(e) => handleOtpChange(index, e.target.value)}
                   onKeyDown={(e) => handleKeyDown(index, e)}
                   onPaste={handlePaste}
-                  ref={(el) => { inputRefs.current[index] = el }}
+                  ref={(el) => {
+                    inputRefs.current[index] = el
+                  }}
                   className="w-12 h-14 text-center text-xl font-semibold focus-visible:ring-2 focus-visible:ring-primary"
                   autoFocus={index === 0}
                 />

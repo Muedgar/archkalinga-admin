@@ -11,14 +11,12 @@ export default async function ShellQuantityUpdateLayout({
     <AdminPanelLayout>
       <ContentLayout>
         {{
-          navbar: <NavBar title='Update Shell Quantity' backUrl='/admin/shell' />,
-          content: (
-            <>
-             {children}
-             </>
-          )
+          navbar: (
+            <NavBar title="Update Shell Quantity" backUrl="/admin/shell" />
+          ),
+          content: <>{children}</>,
         }}
-        </ContentLayout>
+      </ContentLayout>
     </AdminPanelLayout>
   )
 }

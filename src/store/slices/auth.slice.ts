@@ -1,5 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { forgotPassword, login, register, resetPassword, validateOtp } from '../thunks'
+import {
+  forgotPassword,
+  login,
+  register,
+  resetPassword,
+  validateOtp,
+} from '../thunks'
 import { IUser } from '@/interfaces'
 
 export interface AuthState {
@@ -44,12 +50,11 @@ export const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         if (!action.payload?.requiresOtp) {
           state.token = action.payload.token
-        state.user = action.payload.user
-       
+          state.user = action.payload.user
 
-        localStorage.setItem('token', action.payload.token)
+          localStorage.setItem('token', action.payload.token)
         }
-         state.loading = false
+        state.loading = false
       })
       .addCase(login.rejected, (state) => {
         state.loading = false
@@ -62,7 +67,7 @@ export const authSlice = createSlice({
         state.token = action.payload.token
         state.user = action.payload.user
         localStorage.setItem('token', action.payload.token)
-         state.loading = false
+        state.loading = false
       })
       .addCase(validateOtp.rejected, (state) => {
         state.loading = false
@@ -77,15 +82,15 @@ export const authSlice = createSlice({
         state.loading = false
       })
       // reset password
-            .addCase(resetPassword.pending, (state) => {
-              state.loading = true
-            })
-            .addCase(resetPassword.fulfilled, (state) => {
-              state.loading = false
-            })
-            .addCase(resetPassword.rejected, (state) => {
-              state.loading = false
-            })
+      .addCase(resetPassword.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(resetPassword.fulfilled, (state) => {
+        state.loading = false
+      })
+      .addCase(resetPassword.rejected, (state) => {
+        state.loading = false
+      })
   },
 })
 

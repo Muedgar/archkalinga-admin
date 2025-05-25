@@ -24,7 +24,9 @@ export const resetPasswordSchema = z.object({
     .regex(/[a-z]/, {
       message: 'Confirm password must contain at least one lowercase letter',
     })
-    .regex(/[0-9]/, { message: 'Confirm password must contain at least one number' })
+    .regex(/[0-9]/, {
+      message: 'Confirm password must contain at least one number',
+    })
     .regex(/[^A-Za-z0-9]/, {
       message: 'Confirm password must contain at least one special character',
     }),

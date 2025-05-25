@@ -7,12 +7,12 @@ import { useIsMobile } from '@/hooks/use-mobile'
 import Link from 'next/link'
 
 interface NavBarProps {
-  title: string;
-  backUrl?: string;
+  title: string
+  backUrl?: string
   children?: React.ReactNode
 }
 
-export function NavBar({title, backUrl, children}: NavBarProps) {
+export function NavBar({ title, backUrl, children }: NavBarProps) {
   const isMobile = useIsMobile()
   const sidebar = useStore(useSidebarStore, (x) => x)
   if (!sidebar) return null
@@ -26,7 +26,11 @@ export function NavBar({title, backUrl, children}: NavBarProps) {
             onClick={() => openSidebar(false)}
           />
         )}
-        {backUrl && <Link prefetch={true} href={backUrl}><ArrowLeft className="cursor-pointer" /></Link>}
+        {backUrl && (
+          <Link prefetch={true} href={backUrl}>
+            <ArrowLeft className="cursor-pointer" />
+          </Link>
+        )}
         <p>{title}</p>
       </div>
       <div className="flex h-full w-fit justify-center items-center">

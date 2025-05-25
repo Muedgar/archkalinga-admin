@@ -6,13 +6,18 @@ import { useSelector } from 'react-redux'
 import { RootState } from '@/store/store'
 import { Loader2 } from 'lucide-react'
 
-const RedirectIfAuthenticated = ({ children }: { children: React.ReactNode }) => {
+const RedirectIfAuthenticated = ({
+  children,
+}: {
+  children: React.ReactNode
+}) => {
   const router = useRouter()
   const token = useSelector((state: RootState) => state.auth.token)
   const [checking, setChecking] = useState(true)
 
   useEffect(() => {
-    const savedToken = token || (typeof window !== 'undefined' && localStorage.getItem('token'))
+    const savedToken =
+      token || (typeof window !== 'undefined' && localStorage.getItem('token'))
     if (savedToken) {
       router.replace('/admin')
     } else {

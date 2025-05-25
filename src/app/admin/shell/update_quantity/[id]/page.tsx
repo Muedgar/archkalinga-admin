@@ -1,7 +1,6 @@
 'use client'
 
-import UpdateShellQuantityForm from "../../forms/update_shellquantity"
-
+import UpdateShellQuantityForm from '../../forms/update_shellquantity'
 
 export default function UpdateShellQuantityComponent() {
   return (

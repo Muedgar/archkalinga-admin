@@ -21,7 +21,13 @@ import { AppDispatch, RootState } from '@/store/store'
 import { getProjects, getTask, updateTask } from '@/store/thunks'
 import { toast } from 'react-toastify'
 import { useParams, useRouter } from 'next/navigation'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { IProject } from '@/interfaces'
 import { TaskFormValues, taskSchema } from '../schemas'
 
@@ -36,20 +42,19 @@ const UpdateTaskForm = () => {
     resolver: zodResolver(taskSchema),
     defaultValues: {
       name: '',
-      projectId: ''
+      projectId: '',
     },
   })
 
-   useEffect(() => {
-      dispatch(getProjects({ page: 1, limit: 400 }))
-    }, [dispatch])
+  useEffect(() => {
+    dispatch(getProjects({ page: 1, limit: 400 }))
+  }, [dispatch])
 
   useEffect(() => {
     if (id) {
       dispatch(getTask({ id: `${id}` }))
     }
   }, [dispatch, id])
-  
 
   useEffect(() => {
     if (currentTask) {
@@ -90,30 +95,30 @@ const UpdateTaskForm = () => {
           )}
         />
 
-         <FormField
-            control={form.control}
-            name="projectId"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Project</FormLabel>
-                <FormControl>
-                  <Select onValueChange={field.onChange} value={field.value}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a project" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {projects?.map((project: IProject) => (
-                        <SelectItem key={project.id} value={project.id}>
-                          {project.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+        <FormField
+          control={form.control}
+          name="projectId"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Project</FormLabel>
+              <FormControl>
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a project" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {projects?.map((project: IProject) => (
+                      <SelectItem key={project.id} value={project.id}>
+                        {project.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         {/* Submit Button */}
         {/* Back and Submit Buttons */}

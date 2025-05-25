@@ -11,14 +11,10 @@ export default async function RoleViewLayout({
     <AdminPanelLayout>
       <ContentLayout>
         {{
-          navbar: <NavBar title='View Role' backUrl='/admin/roles' />,
-          content: (
-            <>
-             {children}
-             </>
-          )
+          navbar: <NavBar title="View Role" backUrl="/admin/roles" />,
+          content: <>{children}</>,
         }}
-        </ContentLayout>
+      </ContentLayout>
     </AdminPanelLayout>
   )
 }

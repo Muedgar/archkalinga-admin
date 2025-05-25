@@ -11,20 +11,18 @@ export default function ViewUserComponent() {
   const { user } = useSelector((state: RootState) => state.auth)
   return (
     <div className="md:w-1/2 mx-auto">
-      
-
       <Tabs defaultValue="profile">
-      <TabsList className="grid w-full grid-cols-2">
-        <TabsTrigger value="profile">Profile</TabsTrigger>
-        <TabsTrigger value="password">Change password</TabsTrigger>
-      </TabsList>
-      <TabsContent value="profile">
-        <ViewUserForm />
-      </TabsContent>
-      <TabsContent value="password">
-        {user?.id && <ChangePasswordForm id={user.id} />}
-      </TabsContent>
-    </Tabs>
+        <TabsList className="grid w-full grid-cols-2">
+          <TabsTrigger value="profile">Profile</TabsTrigger>
+          <TabsTrigger value="password">Change password</TabsTrigger>
+        </TabsList>
+        <TabsContent value="profile">
+          <ViewUserForm />
+        </TabsContent>
+        <TabsContent value="password">
+          {user?.id && <ChangePasswordForm id={user.id} />}
+        </TabsContent>
+      </Tabs>
     </div>
   )
 }

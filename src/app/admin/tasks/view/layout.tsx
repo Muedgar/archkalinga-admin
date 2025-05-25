@@ -11,14 +11,10 @@ export default async function TaskViewLayout({
     <AdminPanelLayout>
       <ContentLayout>
         {{
-          navbar: <NavBar title='View Task' backUrl='/admin/tasks' />,
-          content: (
-            <>
-             {children}
-             </>
-          )
+          navbar: <NavBar title="View Task" backUrl="/admin/tasks" />,
+          content: <>{children}</>,
         }}
-        </ContentLayout>
+      </ContentLayout>
     </AdminPanelLayout>
   )
 }

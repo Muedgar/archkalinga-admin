@@ -11,14 +11,10 @@ export default async function UserViewLayout({
     <AdminPanelLayout>
       <ContentLayout>
         {{
-          navbar: <NavBar title='View User' backUrl='/admin/users' />,
-          content: (
-            <>
-             {children}
-             </>
-          )
+          navbar: <NavBar title="View User" backUrl="/admin/users" />,
+          content: <>{children}</>,
         }}
-        </ContentLayout>
+      </ContentLayout>
     </AdminPanelLayout>
   )
 }

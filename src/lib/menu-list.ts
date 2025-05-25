@@ -42,12 +42,12 @@ export function getMenuList(): Group[] {
           icon: ClipboardCheckIcon
         },
         {
-          href: '/admin/schedules/shell',
+          href: '/admin/shell',
           label: 'Materials Schedules',
           icon: BrickWallIcon,
           submenus: [
             {
-              href: '/admin/schedules/shell',
+              href: '/admin/shell',
               label: 'Shell',
             },
           ],

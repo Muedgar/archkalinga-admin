@@ -71,7 +71,7 @@ const UpdateUserForm = () => {
         form.setValue('userType', currentUser.userType)
       }
     }
-  }, [currentUser])
+  }, [form, currentUser])
 
   const onSubmit = async (data: UpdateUserFormValues) => {
     await dispatch(

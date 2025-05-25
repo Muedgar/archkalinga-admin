@@ -104,7 +104,7 @@ const LoginForm = () => {
       ).unwrap()
       toast.success('Login successful.')
       setShowOtpModal(false)
-      router.push('/admin')
+      router.push('/admin/projects')
     } catch (error) {
       toast.error(String(error))
     }
@@ -120,7 +120,7 @@ const LoginForm = () => {
           setShowOtpModal(true)
         } else {
           toast.success('Login successful')
-          router.push('/admin')
+          router.push('/admin/projects')
         }
       })
       .catch((error) => {

@@ -192,16 +192,18 @@ export default function Users() {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <Link prefetch={true} href={`users/view/${user.id}`}>
               <DropdownMenuItem
-                onClick={() => router.push(`users/view/${user.id}`)}
               >
                 View
               </DropdownMenuItem>
+              </Link>
+              <Link prefetch={true} href={`users/update/${user.id}`}>
               <DropdownMenuItem
-                onClick={() => router.push(`users/update/${user.id}`)}
               >
                 Edit
               </DropdownMenuItem>
+              </Link>
               {user.status ? (
                 <DropdownMenuItem onClick={() => showDeactivateDialog(user)}>
                   Deactivate
@@ -241,15 +243,18 @@ export default function Users() {
         {{
           navbar: (
             <NavBar title='Users'>
-              <Button onClick={() => router.push('/admin/users/new')}>
+              <Link prefetch={true} href={'/admin/users/new'}>
+              <Button>
                 <PlusIcon />
                 Create User
               </Button>
+              </Link>
             </NavBar>
           ),
           content: (
             <div>
               {loading && <Skeleton />}
+              
               <DataTable
                 pageCount={pages}
                 limit={limit}

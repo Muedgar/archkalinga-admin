@@ -59,8 +59,7 @@ const ResetPasswordForm = () => {
         router.push('/auth/login')
       })
       .catch((error) => {
-        console.log(error)
-        toast.error('Something went wrong.')
+        toast.error(error || 'Something went wrong.')
       })
   }
 

@@ -53,12 +53,12 @@ export const AuthLayout = ({ children }: AuthLayoutProps) => {
         <div className="flex justify-end items-center mb-2">
           <div className="text-sm">
             {pathname.toString().includes('login') ? (
-              <Link href="register" className="text-yellow-600 hover:underline">
+              <Link prefetch={true} href="register" className="text-yellow-600 hover:underline">
                 <span className="text-black">{"Don't have an account? "}</span>{' '}
                 Signup
               </Link>
             ) : (
-              <Link href="login" className="text-yellow-600 hover:underline">
+              <Link prefetch={true} href="login" className="text-yellow-600 hover:underline">
                 <span className="text-black">Already have an account?</span>{' '}
                 Login
               </Link>

@@ -175,6 +175,7 @@ export function CollapseMenuButton({
         {submenus.map(({ href, label, active }, index) => (
           <DropdownMenuItem key={index} asChild>
             <Link
+            prefetch={true}
               className={`cursor-pointer ${
                 ((active === undefined && pathname === href) || // Changed from location.pathname
                   active) &&

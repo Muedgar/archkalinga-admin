@@ -49,7 +49,7 @@ export default function DataTable<T>({
   const noResults = table.getRowModel().rows.length === 0
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 relative z-0">
       {/* Header section with title and description */}
       {(title || description) && (
         <div className="flex flex-col space-y-1.5 pb-2">

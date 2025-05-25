@@ -30,6 +30,7 @@ import { useRouter } from 'next/navigation'
 import { ConfirmationDialog } from '@/components/alert-dialog'
 import ContentLayout from '@/components/layout/content-layout'
 import { NavBar } from '@/components/navigation/navbar'
+import Link from 'next/link'
 
 const handleActivate = async (dispatch: AppDispatch, roleId: string) => {
   await dispatch(activateRole({ id: roleId }))
@@ -60,7 +61,6 @@ const handleDeactivate = async (dispatch: AppDispatch, roleId: string) => {
         })
       )
     }).catch((error) => {
-      console.log(error)
       toast.error(error)
     })
 }
@@ -168,16 +168,18 @@ export default function Roles() {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <Link prefetch={true} href={`roles/view/${role.id}`}>
               <DropdownMenuItem
-                onClick={() => router.push(`roles/view/${role.id}`)}
               >
                 View
               </DropdownMenuItem>
+              </Link>
+              <Link prefetch={true} href={`roles/update/${role.id}`}>
               <DropdownMenuItem
-                onClick={() => router.push(`roles/update/${role.id}`)}
               >
                 Edit
               </DropdownMenuItem>
+              </Link>
               {role.status ? (
                 <DropdownMenuItem onClick={() => showDeactivateDialog(role)}>
                   Deactivate
@@ -211,10 +213,12 @@ export default function Roles() {
         {{
           navbar: (
             <NavBar title='Roles'>
-              <Button onClick={() => router.push('/admin/roles/new')}>
+              <Link prefetch={true} href={'/admin/roles/new'}>
+              <Button>
                 <PlusIcon />
                 Create Role
               </Button>
+              </Link>
             </NavBar>
           ),
           content: (

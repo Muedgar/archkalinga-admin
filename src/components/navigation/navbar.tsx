@@ -18,7 +18,7 @@ export function NavBar({title, backUrl, children}: NavBarProps) {
   if (!sidebar) return null
   const { openSidebar } = sidebar
   return (
-    <nav className="sticky top-0 w-full h-[74px] bg-amber-200 glassy flex flex-row justify-between px-4 sm:pl-10 sm:pr-10">
+    <nav className="sticky top-0 z-50 w-full h-[74px] bg-amber-200 glassy flex flex-row justify-between px-4 sm:pl-10 sm:pr-10">
       <div className="flex h-full w-fit justify-center items-center">
         {isMobile && (
           <SidebarTrigger
@@ -26,7 +26,7 @@ export function NavBar({title, backUrl, children}: NavBarProps) {
             onClick={() => openSidebar(false)}
           />
         )}
-        {backUrl && <Link href={backUrl}><ArrowLeft className="cursor-pointer" /></Link>}
+        {backUrl && <Link prefetch={true} href={backUrl}><ArrowLeft className="cursor-pointer" /></Link>}
         <p>{title}</p>
       </div>
       <div className="flex h-full w-fit justify-center items-center">

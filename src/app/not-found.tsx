@@ -15,7 +15,7 @@ export default function NotFound() {
           The page you are looking for does not exist or has been moved.
         </p>
         <Button asChild variant="outline" className="flex items-center gap-2">
-          <Link href="/admin">
+          <Link prefetch={true} href="/admin/projects">
             <ArrowLeftIcon className="w-4 h-4" />
             Go back to Admin Dashboard
           </Link>

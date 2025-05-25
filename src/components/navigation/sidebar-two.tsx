@@ -48,6 +48,7 @@ import { AppDispatch, RootState } from '@/store/store'
 import { IUser } from '@/interfaces'
 import { getUser } from '@/store/thunks'
 import { logout } from '@/store/slices/auth.slice'
+import Link from 'next/link'
 
 export default function SideBar() {
   const router = useRouter();
@@ -62,7 +63,6 @@ const dispatch = useDispatch<AppDispatch>()
         dispatch(getUser({ id: `${user?.id}` }))
         .unwrap()
         .then(d => {
-          console.log('user:  ',d)
           setUserDetails(d)
         })
       }
@@ -132,23 +132,27 @@ const dispatch = useDispatch<AppDispatch>()
                 <SidebarMenuItem>
                   {/* Collapsible */}
                   {!getOpenState()?
-                   <Button onClick={() => router.push(href)} className='w-full flex justify-between cursor-pointer'>
+                   <Link prefetch={true} href={href}>
+                   <Button className='w-full flex justify-between cursor-pointer'>
             <div className='flex justify-center items-center'>
               {Icon && <Icon size={18} />}
             <p className='ml-4'>{label}</p>
             </div>
-          </Button>:
+          </Button>
+                   </Link>:
               <DropdownMenu>
                 <TooltipProvider disableHoverableContent>
         <Tooltip delayDuration={100}>
           <TooltipTrigger asChild>
             <DropdownMenuTrigger className="cursor-pointer w-full flex justify-center items-center" asChild>
-                  <Button onClick={() => router.push(href)} className='w-fit flex justify-between cursor-pointer'>
+                 <Link prefetch={true} href={href}>
+                  <Button className='w-fit flex justify-between cursor-pointer'>
             <div className='flex justify-center items-center'>
               {Icon && <Icon size={18} />}
             </div>
              
           </Button>
+                  </Link>
                 </DropdownMenuTrigger>
           </TooltipTrigger>
           <TooltipContent side="right" align="start" alignOffset={2}>
@@ -196,9 +200,11 @@ const dispatch = useDispatch<AppDispatch>()
                       <div className='w-full h-fit flex'>
                         <div className='w-full h-fit border-l pl-2 flex flex-col'>
                           {submenus?.map(({href, label}, index) => (
-                            <Button onClick={() => router.push(href)} key={index} className='mb-1 flex justify-start items-start cursor-pointer'>
+                            <Link className='w-full' prefetch={true} href={href} key={index}>
+                            <Button  className='w-full mb-1 flex justify-start items-start cursor-pointer'>
                         <p className='text-left'>{label}</p>
                       </Button>
+                            </Link>
                           ))}
                         </div>
                       </div>
@@ -214,12 +220,14 @@ const dispatch = useDispatch<AppDispatch>()
         <Tooltip delayDuration={100}>
           <TooltipTrigger asChild>
             <DropdownMenuTrigger className="cursor-pointer w-full flex justify-center items-center" asChild>
+                  <Link prefetch={true} href={'#'}>
                   <Button onClick={() => setIsCollapse(!isCollapse)} className='w-fit flex justify-between cursor-pointer'>
             <div className='flex justify-center items-center'>
               {Icon && <Icon size={18} />}
             </div>
              
           </Button>
+                  </Link>
                 </DropdownMenuTrigger>
           </TooltipTrigger>
           <TooltipContent side="right" align="start" alignOffset={2}>
@@ -236,9 +244,11 @@ const dispatch = useDispatch<AppDispatch>()
                   <div className='w-full h-fit flex'>
                         <div className='w-full h-fit border-l pl-2 flex flex-col'>
                           {submenus?.map(({href, label}, index) => (
-                            <Button onClick={() => router.push(href)} key={index} className='mb-1 flex justify-start items-start cursor-pointer'>
+                            <Link prefetch={true} href={href} key={index}>
+                            <Button className='w-full mb-1 flex justify-start items-start cursor-pointer'>
                         <p className='text-left'>{label}</p>
                       </Button>
+                            </Link>
                           ))}
                         </div>
                       </div>
@@ -289,22 +299,26 @@ const dispatch = useDispatch<AppDispatch>()
                 {/* dropdown content */}
                 <DropdownMenuContent
                   side={!getOpenState() ? 'bottom' : 'right'}
-                  className="w-[240px] cursor-pointer pt-2 pb-2"
+                  className="w-[200px] cursor-pointer pt-2 pb-2"
                   align="start"
                 >
                   <DropdownMenuItem
                       className="w-full flex h-[54px] items-center pl-2 pr-2 hover:bg-slate-300"
                     >
-                      <Button onClick={() => router.push('/admin/users/profile')} className="w-full">
+                      <Link className='w-full' prefetch={true} href={'/admin/users/profile'}>
+                      <Button className="w-full">
                         <span className="font-bold text-sm">Profile</span>
                       </Button>
+                      </Link>
                     </DropdownMenuItem>
                      <DropdownMenuItem
                       className="w-full flex h-[54px] items-center pl-2 pr-2 hover:bg-slate-300"
                     >
+                      <Link className='w-full' prefetch={true} href={'#'}>
                       <Button onClick={() => handleLogout()} className="w-full">
                         <span className="font-bold text-sm">Logout</span>
                       </Button>
+                      </Link>
                     </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

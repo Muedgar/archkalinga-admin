@@ -40,8 +40,7 @@ const ForgotPasswordForm = () => {
         toast.success('Reset password link sent to your email.')
         router.push('/auth/login')
       })
-      .catch((error) => {
-        console.log(error)
+      .catch(() => {
         toast.error('Something went wrong.')
       })
   }

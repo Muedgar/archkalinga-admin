@@ -4,7 +4,9 @@ import {
   errorReducer,
   navigationReducer,
   permissionReducer,
+  projectReducer,
   roleReducer,
+  shellQuantityReducer,
   userReducer,
 } from './slices'
 import { errorMiddleware } from './middlewares/error.middleware'
@@ -20,6 +22,8 @@ import {
   REGISTER,
   REHYDRATE,
 } from 'redux-persist'
+import { taskReducer } from './slices/task.slice'
+import { shellItemReducer } from './slices/shellitem.slice'
 
 // Define a persist config
 const persistConfig = {
@@ -36,6 +40,10 @@ const rootReducer = combineReducers({
   user: userReducer,
   permission: permissionReducer,
   role: roleReducer,
+  project: projectReducer,
+  task: taskReducer,
+  shellItem: shellItemReducer,
+  shellQuantity: shellQuantityReducer,
 })
 
 // Create a persisted reducer

@@ -127,8 +127,7 @@ const LoginForm = () => {
         }
       })
       .catch((error) => {
-        toast.error('Something went wrong.')
-        console.error(error)
+        toast.error(error)
       })
   }
 

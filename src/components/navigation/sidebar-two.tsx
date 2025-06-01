@@ -95,8 +95,8 @@ export default function SideBar() {
                 'ArchKalinga'
               ) : (
                 <span className="flex flex-col">
-                  <span>ARCH</span>
-                  <span>KALINGA</span>
+                  <span>Arch</span>
+                  <span>Kalinga</span>
                 </span>
               )}
             </Label>

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { axiosClient } from '@/hooks'
 import { UserType } from '@/types'
 import { createAsyncThunk } from '@reduxjs/toolkit'

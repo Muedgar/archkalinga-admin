@@ -21,11 +21,9 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Button } from '@/components/ui/button'
 import { MoreHorizontal, PlusIcon } from 'lucide-react'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
 export default function Projects() {
-  const router = useRouter()
   // fetch data
   const dispatch = useDispatch<AppDispatch>()
   const { loading, projects, pages, page, limit } = useSelector(

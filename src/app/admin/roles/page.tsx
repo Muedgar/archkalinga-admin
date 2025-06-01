@@ -26,7 +26,6 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Button } from '@/components/ui/button'
 import { MoreHorizontal, PlusIcon } from 'lucide-react'
-import { useRouter } from 'next/navigation'
 import { ConfirmationDialog } from '@/components/alert-dialog'
 import ContentLayout from '@/components/layout/content-layout'
 import { NavBar } from '@/components/navigation/navbar'
@@ -84,7 +83,6 @@ const handleDelete = async (dispatch: AppDispatch, roleId: string) => {
 }
 
 export default function Roles() {
-  const router = useRouter()
   // fetch data
   const dispatch = useDispatch<AppDispatch>()
   const { loading, roles, pages, page, limit } = useSelector(

@@ -1,7 +1,12 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import {
   authReducer,
+  createGetTotalItemUsageAccrossTasksReducer,
   errorReducer,
+  getShellScheduleTreeReducer,
+  getUserItemUsageReducer,
+  itemAndQuantityBreakdownByTaskReducer,
+  itemUsageWithUserContributionsReducer,
   navigationReducer,
   permissionReducer,
   projectReducer,
@@ -44,6 +49,12 @@ const rootReducer = combineReducers({
   task: taskReducer,
   shellItem: shellItemReducer,
   shellQuantity: shellQuantityReducer,
+  createGetTotalItemUsageAccrossTasks:
+    createGetTotalItemUsageAccrossTasksReducer,
+  itemAndQuantityBreakdownByTask: itemAndQuantityBreakdownByTaskReducer,
+  getUserItemUsage: getUserItemUsageReducer,
+  itemUsageWithUserContributions: itemUsageWithUserContributionsReducer,
+  getShellScheduleTree: getShellScheduleTreeReducer
 })
 
 // Create a persisted reducer

@@ -5,7 +5,7 @@ import DataTable from '@/components/datatable/data-table'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/store/store'
 import { useEffect } from 'react'
-import { getRoles, getShellItems } from '@/store/thunks'
+import { getShellItems } from '@/store/thunks'
 import { Skeleton } from '@/components/ui/skeleton'
 import { ColumnDef } from '@tanstack/react-table'
 import { IShellItem } from '@/interfaces'
@@ -18,11 +18,9 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Button } from '@/components/ui/button'
 import { MoreHorizontal } from 'lucide-react'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
 export default function ShellTemplate() {
-  const router = useRouter()
   // fetch data
   const dispatch = useDispatch<AppDispatch>()
   const { loading, shellItems, pages, page, limit } = useSelector(

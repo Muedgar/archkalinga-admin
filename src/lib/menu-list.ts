@@ -2,6 +2,7 @@ import {
   BoxesIcon,
   BrickWallIcon,
   ClipboardCheckIcon,
+  FolderArchiveIcon,
   FolderKanbanIcon,
   LucideIcon,
   Users,
@@ -51,6 +52,16 @@ export function getMenuList(): Group[] {
               label: 'Shell',
             },
           ],
+        },
+      ],
+    },
+    {
+      groupLabel: 'Reports',
+      menus: [
+        {
+          href: '/admin/reports/shell',
+          label: 'Shell schedule',
+          icon: FolderArchiveIcon,
         },
       ],
     },

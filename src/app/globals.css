@@ -102,3 +102,10 @@
 .scrollbar-hidden::-webkit-scrollbar {
   display: none; /* Chrome, Safari */
 }
+
+
+path {
+  fill: none;
+  stroke: #cfc804
+}
+

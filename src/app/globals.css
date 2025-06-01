@@ -103,9 +103,7 @@
   display: none; /* Chrome, Safari */
 }
 
-
 path {
   fill: none;
-  stroke: #cfc804
+  stroke: #cfc804;
 }
-

@@ -23,10 +23,13 @@ export const itemUsageWithUserContributions = createSlice({
       .addCase(getItemUsageWithUserContributions.pending, (state) => {
         state.loading = true
       })
-      .addCase(getItemUsageWithUserContributions.fulfilled, (state, payload) => {
-        state.loading = false
-        state.itemUsageWithUserContributions = payload.payload
-      })
+      .addCase(
+        getItemUsageWithUserContributions.fulfilled,
+        (state, payload) => {
+          state.loading = false
+          state.itemUsageWithUserContributions = payload.payload
+        }
+      )
       .addCase(getItemUsageWithUserContributions.rejected, (state) => {
         state.loading = false
       })

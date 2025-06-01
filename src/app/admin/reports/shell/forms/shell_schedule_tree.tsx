@@ -26,12 +26,15 @@ export const D3Tree: React.FC<D3TreeProps> = ({
     const innerHeight = height - margin.top - margin.bottom
 
     // Create root
-    const root = d3.hierarchy(
-      data,
-      d => d.children?.filter((child): child is IShellScheduleTree => 'children' in child)
+    const root = d3.hierarchy(data, (d) =>
+      d.children?.filter(
+        (child): child is IShellScheduleTree => 'children' in child
+      )
     )
 
-    const treeLayout = d3.tree<IShellScheduleTree>().size([innerHeight, innerWidth])
+    const treeLayout = d3
+      .tree<IShellScheduleTree>()
+      .size([innerHeight, innerWidth])
     const treeData = treeLayout(root)
     const nodes = treeData.descendants()
     const links = treeData.links()
@@ -39,7 +42,8 @@ export const D3Tree: React.FC<D3TreeProps> = ({
     // Clear previous content inside group (not whole SVG)
     d3.select(gRef.current).selectAll('*').remove()
 
-    const g = d3.select(gRef.current)
+    const g = d3
+      .select(gRef.current)
       .attr('transform', `translate(${margin.left},${margin.top})`)
 
     // Draw links
@@ -50,38 +54,44 @@ export const D3Tree: React.FC<D3TreeProps> = ({
       .attr('fill', 'none')
       .attr('stroke', '#ccc')
       .attr('stroke-width', 1.5)
-      .attr('d', d3.linkHorizontal<d3.HierarchyPointLink<IShellScheduleTree>, d3.HierarchyPointNode<IShellScheduleTree>>()
-        .x(d => d.y)
-        .y(d => d.x)
+      .attr(
+        'd',
+        d3
+          .linkHorizontal<
+            d3.HierarchyPointLink<IShellScheduleTree>,
+            d3.HierarchyPointNode<IShellScheduleTree>
+          >()
+          .x((d) => d.y)
+          .y((d) => d.x)
       )
 
     // Draw nodes
-    const node = g.selectAll('.node')
+    const node = g
+      .selectAll('.node')
       .data(nodes)
       .join('g')
       .attr('class', 'node')
-      .attr('transform', d => `translate(${d.y},${d.x})`)
+      .attr('transform', (d) => `translate(${d.y},${d.x})`)
 
-    node.append('circle')
-      .attr('r', 5)
-      .attr('fill', '#ffcc00')
+    node.append('circle').attr('r', 5).attr('fill', '#ffcc00')
 
-    node.append('text')
+    node
+      .append('text')
       .attr('dy', 4)
-      .attr('x', d => (d.children ? -10 : 10))
-      .style('text-anchor', d => (d.children ? 'end' : 'start'))
+      .attr('x', (d) => (d.children ? -10 : 10))
+      .style('text-anchor', (d) => (d.children ? 'end' : 'start'))
       .style('font-size', '12px')
-      .text(d => d.data.id)
+      .text((d) => d.data.id)
 
     // Enable zoom
-    const zoom = d3.zoom<SVGSVGElement, unknown>()
+    const zoom = d3
+      .zoom<SVGSVGElement, unknown>()
       .scaleExtent([0.2, 2])
       .on('zoom', (event) => {
         d3.select(gRef.current).attr('transform', event.transform)
       })
 
     d3.select(svgRef.current).call(zoom)
-
   }, [data, width, height])
 
   return (

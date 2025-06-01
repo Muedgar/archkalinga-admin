@@ -54,7 +54,7 @@ const rootReducer = combineReducers({
   itemAndQuantityBreakdownByTask: itemAndQuantityBreakdownByTaskReducer,
   getUserItemUsage: getUserItemUsageReducer,
   itemUsageWithUserContributions: itemUsageWithUserContributionsReducer,
-  getShellScheduleTree: getShellScheduleTreeReducer
+  getShellScheduleTree: getShellScheduleTreeReducer,
 })
 
 // Create a persisted reducer

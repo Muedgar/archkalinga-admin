@@ -23,18 +23,14 @@ export const getShellScheduleTreeSlice = createSlice({
       .addCase(jsonShellSchedule.pending, (state) => {
         state.loading = true
       })
-      .addCase(
-        jsonShellSchedule.fulfilled,
-        (state, payload) => {
-          state.loading = false
-          state.projectShellSchedule = payload.payload
-        }
-      )
+      .addCase(jsonShellSchedule.fulfilled, (state, payload) => {
+        state.loading = false
+        state.projectShellSchedule = payload.payload
+      })
       .addCase(jsonShellSchedule.rejected, (state) => {
         state.loading = false
       })
   },
 })
 
-export const getShellScheduleTreeReducer =
-  getShellScheduleTreeSlice.reducer
+export const getShellScheduleTreeReducer = getShellScheduleTreeSlice.reducer

@@ -9,13 +9,11 @@ import {
 import { cn } from '@/lib'
 import { AppDispatch, RootState } from '@/store/store'
 import {
+  excelShellSchedule,
   getProjects,
   jsonShellSchedule,
 } from '@/store/thunks'
-import {
-  ChevronDown,
-  Loader2,
-} from 'lucide-react'
+import { ChevronDown, Loader2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
@@ -43,7 +41,6 @@ import { IProject } from '@/interfaces'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { D3Tree } from './shell_schedule_tree'
 
-
 export const ProjectShellSchedule = () => {
   const dispatch = useDispatch<AppDispatch>()
   const [isCollapse, setIsCollapse] = useState(true)
@@ -68,11 +65,18 @@ export const ProjectShellSchedule = () => {
       jsonShellSchedule({
         ...data,
       })
-    ).unwrap()
-    .then(() => {
-      console.log('data:  ',projectShellSchedule)
-    })
-    .catch(() => {});
+    )
+      .unwrap()
+      .then(() => {
+        console.log('data:  ', projectShellSchedule)
+      })
+      .catch(() => {})
+
+    await dispatch(
+      excelShellSchedule({
+        ...data,
+      })
+    )
   }
 
   return (
@@ -140,7 +144,6 @@ export const ProjectShellSchedule = () => {
                     )}
                   />
 
-
                   {/* Submit */}
                   <div className="w-full md:w-auto">
                     <Button
@@ -161,20 +164,18 @@ export const ProjectShellSchedule = () => {
         </CollapsibleContent>
       </Collapsible>
 
-{projectShellSchedule && (
-  <Card className="mt-10">
-    <CardHeader>
-      <CardTitle>Shell Schedule Tree</CardTitle>
-    </CardHeader>
-    <CardContent className="overflow-auto">
-      <div className="w-full flex justify-center">
-        <D3Tree data={projectShellSchedule} width={1200} height={800} />
-      </div>
-    </CardContent>
-  </Card>
-)}
-
+      {projectShellSchedule && (
+        <Card className="mt-10">
+          <CardHeader>
+            <CardTitle>Shell Schedule Tree</CardTitle>
+          </CardHeader>
+          <CardContent className="overflow-auto">
+            <div className="w-full flex justify-center">
+              <D3Tree data={projectShellSchedule} width={1200} height={800} />
+            </div>
+          </CardContent>
+        </Card>
+      )}
     </div>
   )
 }
-

@@ -1,12 +1,12 @@
 interface IUserContributions {
-  userId: string;
-  userName: string;
+  userId: string
+  userName: string
   contributions: {
-    taskId: string;
-    taskName: string;
-    amount: number;
-    unit: string;
-  }[];
+    taskId: string
+    taskName: string
+    amount: number
+    unit: string
+  }[]
 }
 
 export interface IItemUsageWithUserContributions {

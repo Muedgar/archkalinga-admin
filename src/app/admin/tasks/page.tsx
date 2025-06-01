@@ -21,7 +21,6 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Button } from '@/components/ui/button'
 import { MoreHorizontal, PlusIcon } from 'lucide-react'
-import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 import { DialogConfig } from '@/types'
 import { ConfirmationDialog } from '@/components/alert-dialog'
@@ -47,7 +46,6 @@ const handleDelete = async (dispatch: AppDispatch, taskId: string) => {
 }
 
 export default function Tasks() {
-  const router = useRouter()
   // fetch data
   const dispatch = useDispatch<AppDispatch>()
   const { loading, tasks, pages, page, limit } = useSelector(

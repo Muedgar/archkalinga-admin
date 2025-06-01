@@ -9,7 +9,10 @@ interface GetItemUsageWithUserContributionsParams {
 
 export const getItemUsageWithUserContributions = createAsyncThunk(
   'reportsGetItemUsageWithUserContributions/getItemUsageWithUserContributions',
-  async (params: GetItemUsageWithUserContributionsParams, { rejectWithValue }) => {
+  async (
+    params: GetItemUsageWithUserContributionsParams,
+    { rejectWithValue }
+  ) => {
     try {
       const response = await axiosClient.get(
         '/reports/shell-schedule/item-user-contributions',

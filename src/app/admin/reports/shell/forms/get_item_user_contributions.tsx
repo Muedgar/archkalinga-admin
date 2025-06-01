@@ -208,7 +208,8 @@ export const GetItemUserContributions = () => {
       <Card className="mt-4">
         <CardHeader>
           <CardTitle className="text-xl flex items-center gap-2">
-            <DrillIcon className="w-5 h-5 text-primary" /> Item usage in a specific project with user contributions
+            <DrillIcon className="w-5 h-5 text-primary" /> Item usage in a
+            specific project with user contributions
           </CardTitle>
         </CardHeader>
         <Separator />
@@ -233,55 +234,61 @@ export const GetItemUserContributions = () => {
             label="Total usage"
             value={itemUsageWithUserContributions?.totalUsage}
           />
-          
-         {itemUsageWithUserContributions && itemUsageWithUserContributions?.userContributions?.length > 0 && (
-  <>
-    <Separator className="col-span-full my-2" />
-    <div className="col-span-full">
-      <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-        <UserIcon className="w-5 h-5 text-primary" />
-        User Contributions
-      </h3>
-      <div className="space-y-4">
-        {itemUsageWithUserContributions.userContributions.map((user) => (
-          <div
-            key={user.userId}
-            className="border rounded-xl p-4 bg-muted/40 shadow-sm"
-          >
-            <InfoRow
-              icon={<UserIcon className="w-4 h-4 text-muted-foreground" />}
-              label="User"
-              value={user.userName}
-            />
 
-            <div className="mt-3 pl-4 border-l-2 border-primary/40 space-y-2">
-              {user.contributions.map((c) => (
-                <div
-                  key={c.taskId}
-                  className="grid grid-cols-1 md:grid-cols-2 gap-2"
-                >
-                  <InfoRow
-                    icon={
-                      <ClipboardListIcon className="w-4 h-4 text-muted-foreground" />
-                    }
-                    label="Task"
-                    value={c.taskName}
-                  />
-                  <InfoRow
-                    icon={<HashIcon className="w-4 h-4 text-muted-foreground" />}
-                    label="Amount"
-                    value={`${c.amount} ${c.unit}`}
-                  />
+          {itemUsageWithUserContributions &&
+            itemUsageWithUserContributions?.userContributions?.length > 0 && (
+              <>
+                <Separator className="col-span-full my-2" />
+                <div className="col-span-full">
+                  <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                    <UserIcon className="w-5 h-5 text-primary" />
+                    User Contributions
+                  </h3>
+                  <div className="space-y-4">
+                    {itemUsageWithUserContributions.userContributions.map(
+                      (user) => (
+                        <div
+                          key={user.userId}
+                          className="border rounded-xl p-4 bg-muted/40 shadow-sm"
+                        >
+                          <InfoRow
+                            icon={
+                              <UserIcon className="w-4 h-4 text-muted-foreground" />
+                            }
+                            label="User"
+                            value={user.userName}
+                          />
+
+                          <div className="mt-3 pl-4 border-l-2 border-primary/40 space-y-2">
+                            {user.contributions.map((c) => (
+                              <div
+                                key={c.taskId}
+                                className="grid grid-cols-1 md:grid-cols-2 gap-2"
+                              >
+                                <InfoRow
+                                  icon={
+                                    <ClipboardListIcon className="w-4 h-4 text-muted-foreground" />
+                                  }
+                                  label="Task"
+                                  value={c.taskName}
+                                />
+                                <InfoRow
+                                  icon={
+                                    <HashIcon className="w-4 h-4 text-muted-foreground" />
+                                  }
+                                  label="Amount"
+                                  value={`${c.amount} ${c.unit}`}
+                                />
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )
+                    )}
+                  </div>
                 </div>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </>
-)}
-
+              </>
+            )}
         </CardContent>
       </Card>
     </div>
